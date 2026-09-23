@@ -1,0 +1,11 @@
+.git
+node_modules
+public/vendor
+test-results
+tests
+*.pdf
+output
+scripts
+.agents
+.codex
+.pdf-runtime

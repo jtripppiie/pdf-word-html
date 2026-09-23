@@ -1,0 +1,320 @@
+[
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "450e3bf7f7f94be8875f4d2de6fcb83a895ee1498c3e52f04299f5eb40ba44c0",
+    "page": 32,
+    "display": true,
+    "tex": "\\Delta = \\underbrace{(1-\\alpha)\\left(\\frac{\\alpha\\psi}{1+\\alpha\\psi}\\right)\\left(Ak^{*\\alpha-1}-A\\bar{k}^{*\\alpha-1}\\right)}_{\\text{deviation from planner steady state}} - \\underbrace{\\frac{1}{\\sigma}\\left(\\frac{\\alpha\\psi}{1+\\alpha\\psi}\\right)\\left(Ak^{*\\alpha-1}-\\frac{c^*}{k^*}-\\theta\\right)}_{\\substack{\\text{spread of aggregate consumption}\\\\\\text{over more people}}}.",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 32 (printed page 31), the Delta equation following “Or, using (5.27)”. This is a document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "0de48ebf26e854fb3275c7d9269328ac6ffba5dee28a4d7e1ebb7c83948b9a56",
+    "page": 21,
+    "display": true,
+    "tex": "\\frac{\\alpha Ak^{\\alpha-1}-(\\gamma r^*+\\theta)}{1-\\gamma}>\\alpha Ak^{\\alpha-1}-\\theta\\iff\\alpha Ak^{\\alpha-1}-\\theta>r^*.",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 21 (printed page 20). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "7e1c5896a42403e19fe50f6762309ed8280c6a10b18af52c75cdac87db74faf0",
+    "page": 21,
+    "display": false,
+    "tex": "r^*=\\delta.",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 21 (printed page 20). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "0d54a615a32f21ad93a1cd0bfe1af6636e0c4a3e43d0c3989b7eeecf6607d067",
+    "page": 21,
+    "display": true,
+    "tex": "\\Delta(t)=\\frac{\\gamma}{1-\\gamma}\\left[\\alpha Ak(t)^{\\alpha-1}-\\alpha A\\bar{k}^{\\alpha-1}\\right].\\tag{5.8}",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 21 (printed page 20). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "339f57994477f5bb7f1e9d48bb7b4637ad527f3c8a6a3387c13f9f8032065d76",
+    "page": 21,
+    "display": false,
+    "tex": "P(t)",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 21 (printed page 20). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "a76adbb1a361fc0ac30376507d23e2fe3da607b7a627c23d0b4ed2fbbb45f0a3",
+    "page": 21,
+    "display": false,
+    "tex": "t",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 21 (printed page 20). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "5dd3da9f3fede495f3ce690c7afb2836a65ba092cf000f242fc436fede414c96",
+    "page": 21,
+    "display": false,
+    "tex": "P(t)=1+",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 21 (printed page 20). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "8fe518d34417b6bf46d65efaf2ddb900fee495bf772a4866d6c2f36a18367a10",
+    "page": 21,
+    "display": false,
+    "tex": "\\tau(t)",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 21 (printed page 20). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "7691014bb2c90636961498482db0d439266cbcebd3a48cadfbb06066702d2d78",
+    "page": 21,
+    "display": false,
+    "tex": "\\dot{P}(t)/P(t)=-\\Delta(t)",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 21 (printed page 20). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "9110cddfaee45137245b88719ebb1df8134a0d56959ac2c333017746d8ffd5c7",
+    "page": 21,
+    "display": true,
+    "tex": "\\begin{aligned}\\frac{\\dot{c}}{c}&=\\sigma(\\Delta+\\alpha Ak^{\\alpha-1}-\\theta-\\delta)=\\sigma\\left\\{\\frac{\\gamma}{1-\\gamma}\\left[\\alpha Ak^{\\alpha-1}-\\theta-\\delta\\right]+\\alpha Ak^{\\alpha-1}-\\theta-\\delta\\right\\}\\\\&=\\sigma\\left\\{\\frac{\\alpha Ak^{\\alpha-1}-(\\gamma r^*+\\theta)}{1-\\gamma}-\\delta\\right\\},\\end{aligned}",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 21 (printed page 20). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "3b2748c3cfe4490329de9c815e518a8b24078a9454860e828348ae896614978a",
+    "page": 21,
+    "display": false,
+    "tex": "r^*=\\delta).",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 21 (printed page 20). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "6d98518379a44ca531a8cb02ae502b207e21c77204b2f267b1f4f8c038f7f456",
+    "page": 21,
+    "display": false,
+    "tex": "\\bar{\\tau}",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 21 (printed page 20). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "538c35cafdab17935fd0885b524363b280cd1a74918992434c968c9184e5ee45",
+    "page": 21,
+    "display": false,
+    "tex": "\\bar{P}=1+\\bar{\\tau},",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 21 (printed page 20). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "ea6e59d46bf913e54328e81b44d9ad125dfd0d48ec3c6c4e6232c0f937a6bf6b",
+    "page": 21,
+    "display": false,
+    "tex": "\\tau(0)",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 21 (printed page 20). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "1a7ff164f5481809b1930c7d4921fc35a4986d6660e22fa441a10714d722557f",
+    "page": 21,
+    "display": true,
+    "tex": "P(0)=1+\\tau(0)=\\bar{P}\\exp\\left\\{\\int_0^\\infty\\frac{\\gamma}{1-\\gamma}\\left[\\alpha Ak(s)^{\\alpha-1}-\\alpha A\\bar{k}^{\\alpha-1}\\right]\\mathrm{d}s\\right\\}.",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 21 (printed page 20). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "94802b8a3cf2893349620001a87117397cabc34e0f4074f2b11f78d2432465b0",
+    "page": 21,
+    "display": false,
+    "tex": "r^*<\\delta.",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 21 (printed page 20). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "68e0ae7360488514ffe1a1e455631a1f0709316b6fb9f8da4f8ed0b174a017ec",
+    "page": 26,
+    "display": false,
+    "tex": "\\alpha z",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 26 (printed page 25). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "55469031fa2200af9fd50bcb32ab60991a771ba12cc0cb1b8a12e5bfa4d7397d",
+    "page": 26,
+    "display": true,
+    "tex": "\\alpha\\bar{z}=(1-\\gamma)B+\\gamma(r^*+\\theta)\\equiv\\bar{\\rho}^*.\\tag{5.16}",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 26 (printed page 25). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "5cb103a30167a52ce517a9b416569ed8c9440791d5d5aa0f5c9ab1bf56452fc6",
+    "page": 26,
+    "display": false,
+    "tex": "B",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 26 (printed page 25). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "5cb103a30167a52ce517a9b416569ed8c9440791d5d5aa0f5c9ab1bf56452fc6",
+    "page": 26,
+    "display": false,
+    "tex": "B",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 26 (printed page 25). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "522da2eb18bb3ce5d99dc1852c62a06d754bbd7777ff0da3a49507d96b3c6ccc",
+    "page": 26,
+    "display": false,
+    "tex": "\\gamma\\to0",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 26 (printed page 25). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "b1fe2301ccfbb02186619ccd17c63125a432605b09b4c3b2815fca49e02013a3",
+    "page": 26,
+    "display": false,
+    "tex": "\\sigma(B-\\theta-\\delta)",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 26 (printed page 25). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "0c4d8d6f27fbe33b5dd0003be44b88d668afab6751a0c39df96c99810994b8ee",
+    "page": 26,
+    "display": true,
+    "tex": "\\frac{\\dot{c}}{c}=\\sigma(\\alpha z-\\theta-\\delta).\\tag{5.17}",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 26 (printed page 25). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "784fd1f04d3d844efa54a4287c3d9688fdd6e43949abd812e74b2001d6536389",
+    "page": 26,
+    "display": false,
+    "tex": "z",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 26 (printed page 25). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "0625f67de82faf9c3aaa58b2c4089476496e3706fc963ea99f6154952c75e755",
+    "page": 26,
+    "display": true,
+    "tex": "\\frac{\\dot{z}}{z}=(1-\\alpha)\\left(\\frac{B}{\\alpha}-z\\right),",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 26 (printed page 25). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "f8313c98c83d1afec941eb4c2e0943ef4559896af7aed36f5ccee37335de54c3",
+    "page": 26,
+    "display": false,
+    "tex": "k",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 26 (printed page 25). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "b129c5735b46c59c992ce0056d4034a56bc231a1695b6ce22bb91eca66dade59",
+    "page": 26,
+    "display": false,
+    "tex": "\\nu",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 26 (printed page 25). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "f8313c98c83d1afec941eb4c2e0943ef4559896af7aed36f5ccee37335de54c3",
+    "page": 26,
+    "display": false,
+    "tex": "k",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 26 (printed page 25). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "7870d7cfdc4cd55a0dc79be0ef34ad87dec3bd047817a99020908b4b44c59411",
+    "page": 26,
+    "display": false,
+    "tex": "\\mu",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 26 (printed page 25). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "0c2f1a80bb53d4a624b6cf38bc925bbd95995c2a8a2450139ddde8820f89f64d",
+    "page": 27,
+    "display": true,
+    "tex": "\\nu(1-\\alpha)A\\omega^\\alpha u^{-\\alpha}=\\mu(1-\\gamma)B,",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 27 (printed page 26). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "ea6a258c3f2e73c84e00b5dc19a75dd393a70ceb78a6b92d06468b875f804134",
+    "page": 27,
+    "display": true,
+    "tex": "\\nu(1-\\alpha)A\\omega^\\alpha u^{-\\alpha}=\\mu B",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 27 (printed page 26). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "a6acf4976551aef1b890f58278ce55000b199936aeb2a7741b6b2e8d4235b0ee",
+    "page": 27,
+    "display": false,
+    "tex": "\\gamma/(1-\\gamma)",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 27 (printed page 26). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "dfcf97c55d70a3f4ae9d01a9f5a548c9a8bc696688e2ca42dce7f1e2f1b4921a",
+    "page": 27,
+    "display": true,
+    "tex": "\\frac{\\alpha z-(\\gamma r^*+\\theta)}{1-\\gamma}>\\alpha z-\\theta\\iff\\alpha z-\\theta>r^*.",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 27 (printed page 26). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "0b81885b14d4f967f60cb3348d6e971b6f00b99771b8fed6011ec8a18297476f",
+    "page": 27,
+    "display": false,
+    "tex": "r^*",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 27 (printed page 26). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "01244b1b3d3484abe4f9bf43d5f2c70cfc659a5763f5ae44a189fc95383933d1",
+    "page": 27,
+    "display": false,
+    "tex": "\\bar{\\rho}^*=\\alpha\\bar{z}=(1-\\gamma)B+\\gamma(r^*+\\theta)",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 27 (printed page 26). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "4390e52987044a4b8e90801fc4dd9500942bba47aaab6eec7cbfd5a7d4b91bf0",
+    "page": 27,
+    "display": true,
+    "tex": "\\frac{(1-\\gamma)B+\\gamma(r^*+\\theta)-(\\gamma r^*+\\theta)}{1-\\gamma}+\\theta=B.",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 27 (printed page 26). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "86a706a44ac4fa9786b6d55ff1f58def5e4f8645931340a5f29d03297d412bde",
+    "page": 27,
+    "display": false,
+    "tex": "\\bar{\\xi}",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 27 (printed page 26). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "b77723d062804d6bda88dc3996eb96bd073ee37a8c268624b89b119eefbc38c5",
+    "page": 27,
+    "display": true,
+    "tex": "\\bar{\\xi}=B-\\left[(1-\\gamma)B+\\gamma(r^*+\\theta)\\right]=\\gamma\\left[B-(r^*+\\theta)\\right],",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 27 (printed page 26). Document-specific editorial correction, not inferred OCR."
+  },
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "page": 21,
+    "passage": {
+      "ids": [
+        "math-p21-1",
+        "math-p21-2",
+        "math-p21-3"
+      ],
+      "htmlSha256": "d8a1918234c333cc93264ae0762f768acdee441a750cf3b8ba6d38f2d0dce889",
+      "html": "<p>In the planner model the social return to capital is \\(\\frac{\\alpha Ak^{\\alpha-1}-(\\gamma r^*+\\theta)}{1-\\gamma}\\). In the competitive market model, the household’s perceived return to capital is \\(\\alpha Ak^{\\alpha-1}-\\theta\\). The social return exceeds the privately perceived return provided</p>"
+    },
+    "provenance": "Manually checked against wp26-1 physical page 21: restore the inline fraction and following formula in their original sentence order. Apply only to the exact unedited extracted passage."
+  }
+]

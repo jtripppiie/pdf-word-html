@@ -1,0 +1,10 @@
+[
+  {
+    "pdfSha256": "77c2769e9e8034a34898c399876cf937760cdfa83760964c23e59c407b476b40",
+    "sourceSha256": "450e3bf7f7f94be8875f4d2de6fcb83a895ee1498c3e52f04299f5eb40ba44c0",
+    "page": 32,
+    "display": true,
+    "tex": "\\Delta = \\underbrace{(1-\\alpha)\\left(\\frac{\\alpha\\psi}{1+\\alpha\\psi}\\right)\\left(Ak^{*\\alpha-1}-A\\bar{k}^{*\\alpha-1}\\right)}_{\\text{deviation from planner steady state}} - \\underbrace{\\frac{1}{\\sigma}\\left(\\frac{\\alpha\\psi}{1+\\alpha\\psi}\\right)\\left(Ak^{*\\alpha-1}-\\frac{c^*}{k^*}-\\theta\\right)}_{\\substack{\\text{spread of aggregate consumption}\\\\\\text{over more people}}}.",
+    "provenance": "Manually transcribed and visually checked against wp26-1.pdf, physical page 32 (printed page 31), the Delta equation following “Or, using (5.27)”. This is a document-specific editorial correction, not inferred OCR."
+  }
+]

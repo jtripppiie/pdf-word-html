@@ -1,0 +1,15 @@
+node_modules/
+public/vendor/
+test-results/
+playwright-report/
+.pdf-runtime/
+output/
+*.pdf
+*.docx
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+.agents/
+.codex/

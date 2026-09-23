@@ -1,0 +1,24 @@
+{
+  "name": "pdf-to-html",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/start-math-portal.mjs",
+    "start:math": "node scripts/start-math-portal.mjs",
+    "build": "node build.mjs",
+    "test": "playwright test",
+    "start:browser": "node server.mjs"
+  },
+  "dependencies": {
+    "jszip": "3.10.2",
+    "mammoth": "1.12.3",
+    "mathjax": "3.2.2",
+    "onnxruntime-web": "1.23.2",
+    "pdfjs-dist": "6.3.289"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "pdf-lib": "1.17.1"
+  }
+}

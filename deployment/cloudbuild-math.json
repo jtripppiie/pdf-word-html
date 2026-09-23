@@ -1,0 +1,23 @@
+{
+  "steps": [
+    {
+      "name": "gcr.io/cloud-builders/docker",
+      "args": [
+        "build",
+        "-f",
+        "Dockerfile.cloud",
+        "-t",
+        "us-central1-docker.pkg.dev/project-6d7c1b56-cee5-450d-93e/cloud-run-source-deploy/pdf-to-html:math-zip-20260921-cloud",
+        "."
+      ]
+    }
+  ],
+  "images": [
+    "us-central1-docker.pkg.dev/project-6d7c1b56-cee5-450d-93e/cloud-run-source-deploy/pdf-to-html:math-zip-20260921-cloud"
+  ],
+  "timeout": "1800s",
+  "options": {
+    "machineType": "E2_HIGHCPU_8",
+    "diskSizeGb": 100
+  }
+}

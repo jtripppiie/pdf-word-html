@@ -1,0 +1,17 @@
+{
+  "steps": [
+    {
+      "name": "gcr.io/cloud-builders/docker",
+      "args": [
+        "build",
+        "-t",
+        "us-central1-docker.pkg.dev/project-6d7c1b56-cee5-450d-93e/cloud-run-source-deploy/pdf-to-html:currency-sharing-20260921-final",
+        "."
+      ]
+    }
+  ],
+  "images": [
+    "us-central1-docker.pkg.dev/project-6d7c1b56-cee5-450d-93e/cloud-run-source-deploy/pdf-to-html:currency-sharing-20260921-final"
+  ],
+  "timeout": "1200s"
+}

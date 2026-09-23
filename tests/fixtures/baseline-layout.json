@@ -1,0 +1,747 @@
+{
+  "metadata": {
+    "file_suffix": "pdf",
+    "producer": {
+      "name": "mineru",
+      "version": "4.0.5"
+    },
+    "document": {
+      "title": "Working Paper 25-11: How export restrictions threaten economic security",
+      "authors": [
+        "Chad P. Bown"
+      ],
+      "languages": [
+        "en-US"
+      ],
+      "created_at": "2025-05-23T10:05:15-04:00",
+      "modified_at": "2025-05-23T12:51:58-04:00",
+      "creator_application": "Adobe InDesign 20.3 (Windows)",
+      "producer_application": "Adobe PDF Library 17.0",
+      "page_count": 20,
+      "page_count_kind": "physical"
+    }
+  },
+  "extensions": {
+    "mineru": {
+      "tier": "basic",
+      "parse_mode": "txt"
+    },
+    "docvortex_layout": {
+      "version": 1,
+      "pages": [
+        {
+          "page_idx": 0,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 1,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 2,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        }
+      ]
+    }
+  },
+  "pages": [
+    {
+      "page_idx": 0,
+      "blocks": [
+        {
+          "type": "header",
+          "index": 0,
+          "bbox": [
+            0.081,
+            0.035,
+            0.562,
+            0.085
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "PIE PETERSON INSTITUTE FOR INTERNATIONAL ECONOMICS"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 1,
+          "bbox": [
+            0.5,
+            0.113,
+            0.915,
+            0.151
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "WORKING PAPER",
+              "styles": [
+                "bold"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "doc_title",
+          "index": 2,
+          "bbox": [
+            0.083,
+            0.203,
+            0.606,
+            0.273
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "25-11 How Export Restrictions Threaten Economic Security"
+            }
+          ],
+          "level": 1
+        },
+        {
+          "type": "text",
+          "index": 3,
+          "bbox": [
+            0.084,
+            0.291,
+            0.204,
+            0.308
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Chad P. Bown"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 4,
+          "bbox": [
+            0.084,
+            0.312,
+            0.171,
+            0.329
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "May 2025"
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 5,
+          "bbox": [
+            0.084,
+            0.395,
+            0.185,
+            0.411
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "ABSTRACT"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 6,
+          "bbox": [
+            0.082,
+            0.412,
+            0.728,
+            0.62
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "The fear that a foreign government will impose an export restriction that imperils another country’s economic and national security has driven part of the recent turn to industrial policy and the increased use of tariffs. Countries now worry about disruption not only to their access to energy but also to critical minerals, semiconductors, medical supplies, and other essential goods. Modern use of industrial and trade policy is thus often an attempt to move supply chains in the short term and to sustain them in those new places over the long term, in order to reduce national vulnerability to disruptions caused by export restrictions. However, achieving even modest forms of international cooperation on trade and industrial policy between countries seeking to improve their collective economic security will also require that these same countries take on new commitments to discipline their own use of export restrictions toward each other."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 7,
+          "bbox": [
+            0.749,
+            0.413,
+            0.913,
+            0.596
+          ],
+          "content": [
+            {
+              "type": "hyperlink",
+              "url": "https://www.piie.com/experts/senior-research-staff/chad-p-bown",
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Chad P. Bown"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "content": " is the Reginald Jones Senior Fellow at the Peterson Institute for International Economics. He was on leave for public service as chief economist for the US Department of State in the Biden-Harris administration from January 2024 until January 2025. He is the host of Trade Talks, a podcast about the economics of international trade and policy."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 8,
+          "bbox": [
+            0.085,
+            0.64,
+            0.246,
+            0.656
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "JEL codes: F13, L52"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 9,
+          "bbox": [
+            0.084,
+            0.658,
+            0.659,
+            0.675
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Keywords: export restrictions, economic security, industrial policy, tariffs"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 10,
+          "bbox": [
+            0.104,
+            0.744,
+            0.715,
+            0.855
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Note: A revised version of this paper will be published in the Journal of International Economic Law. This paper is based on the author’s keynote address at the Centre for Inclusive Trade Policy Academic Conference 2025 in Glasgow. Helpful discussions by conference participants, Emily Blanchard, Lothar Ehring, Ilaria Espa, Michael Gasiorek, Bernard Hoekman, Barbara Karni, Marcus Noland, Mona Paulsen, Amy Porges, Stephanie Rickard, Kristin Vekasi, Alan Winters, and outstanding research assistance by Christine Wan are gratefully acknowledged. All remaining errors are the author’s."
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 11,
+          "bbox": [
+            0.084,
+            0.94,
+            0.675,
+            0.953
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "1750 Massachusetts Avenue, NW | Washington, DC 20036-1903 USA | +1.202.328.9000 | www.piie.com"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 1,
+      "blocks": [
+        {
+          "type": "header",
+          "index": 0,
+          "bbox": [
+            0.094,
+            0.053,
+            0.252,
+            0.067
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "WP 25-11 | MAY 2025"
+            }
+          ]
+        },
+        {
+          "type": "page_number",
+          "index": 1,
+          "bbox": [
+            0.892,
+            0.054,
+            0.906,
+            0.065
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "2"
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 2,
+          "bbox": [
+            0.092,
+            0.101,
+            0.252,
+            0.117
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "1. INTRODUCTION"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 3,
+          "bbox": [
+            0.092,
+            0.125,
+            0.718,
+            0.192
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "The world trading system is experiencing a period of upheaval. Unchecked use of industrial policy and tariffs in the name of economic and national security is putting strain on international cooperation even among like-minded countries with common fears about their economic vulnerabilities."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 4,
+          "bbox": [
+            0.092,
+            0.194,
+            0.736,
+            0.311
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "The root of these policies is often the concern that a foreign government will create disorder by imposing an export restriction. Export restrictions are one of the least disciplined and most disruptive policies of the trading system. Yet, restoring some cooperation over industrial policy and tariffs—to address concerns between like-minded countries over their common, excessive economic dependencies—will require that governments of these countries also confront their own use of export restrictions."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 5,
+          "bbox": [
+            0.092,
+            0.313,
+            0.738,
+            0.43
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Disruptive export restrictions are not new to the postwar global economy. In 1973, the Arab members of the Organization of the Petroleum Exporting Countries (OPEC) cartel limited energy production and placed an embargo on exports to the United States and other countries supporting Israel during the Arab–Israeli War. OPEC’s restrictions set off a period of stagflation—high inflation combined with low economic growth—and led to political turmoil in the United States and other high-income countries."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 6,
+          "bbox": [
+            0.091,
+            0.433,
+            0.732,
+            0.653
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "The fact that disruptions caused by export restrictions can trigger an outsized counter-response is also not new. The policy reaction to the OPEC shock, for example, was profound."
+            },
+            {
+              "type": "text",
+              "content": "1",
+              "styles": [
+                "superscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " The United States prioritized energy security as a key part of its domestic and foreign policy, including decisions about whether to wage war. Europe made consequential choices as to the form of its diversification, increasing its reliance on natural gas piped in from the Soviet Union and then Russia. That decision created myriad transatlantic disputes over US sanctions and culminated in Russia’s full-scale invasion of Ukraine in 2022. The oil embargo also led to novel policy initiatives to build stockpiles, including creation of the US Strategic Petroleum Reserve. It also led to the cooperative response—involving a small group of OECD countries—to form the International Energy Agency (IEA) in 1974 and engage in a collective system of rules-based inventory management and coordinated interventions in response to shortages."
+            },
+            {
+              "type": "text",
+              "content": "2",
+              "styles": [
+                "superscript"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 7,
+          "bbox": [
+            0.092,
+            0.654,
+            0.735,
+            0.791
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Attempts have also been made to impose additional disciplines on export restrictions. For example, the effects from the OPEC embargo drove the US negotiating mandate for the Tokyo Round of the General Agreement on Tariffs and Trade (GATT), in the Trade Act of 1974, to tackle export restrictions and charges."
+            },
+            {
+              "type": "text",
+              "content": "3",
+              "styles": [
+                "superscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " Because most of the key OPEC members at the time were not GATT Contracting Parties, this and other efforts to introduce additional ways to discipline export restrictions mostly failed."
+            },
+            {
+              "type": "text",
+              "content": "4",
+              "styles": [
+                "superscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": " Those failures contributed to today’s problem of excessive economic dependencies generating security vulnerabilities,"
+            }
+          ]
+        },
+        {
+          "type": "page_footnote",
+          "index": 8,
+          "bbox": [
+            0.091,
+            0.826,
+            0.727,
+            0.853
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "1 See Daniel Yergin, The Prize: The Epic Quest for Oil, Money, and Power (New York: Free Press, 1991)."
+            }
+          ]
+        },
+        {
+          "type": "page_footnote",
+          "index": 9,
+          "bbox": [
+            0.091,
+            0.854,
+            0.729,
+            0.881
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "2 See Craig S. Bamberger, "
+            },
+            {
+              "type": "hyperlink",
+              "url": "https://iea.blob.core.windows.net/assets/ecce7786-26cc-45af-8b80-c4fb0bfc3ab7/4_ieahistory.pdf",
+              "content": [
+                {
+                  "type": "text",
+                  "content": "The History of the IEA: The First 30 Years"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "content": " (Paris: International Energy Agency, 2004)."
+            }
+          ]
+        },
+        {
+          "type": "page_footnote",
+          "index": 10,
+          "bbox": [
+            0.092,
+            0.881,
+            0.711,
+            0.908
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "3 See the “Access to Supplies” of Section 108 of Trade Act of 1974. See also Frieder Roessler, ‘GATT and Access to Supplies,’ 9 Journal of World Trade Law (1975) at 25–40."
+            }
+          ]
+        },
+        {
+          "type": "page_footnote",
+          "index": 11,
+          "bbox": [
+            0.092,
+            0.909,
+            0.728,
+            0.936
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "4 For a GATT Secretariat review, see GATT, ‘Export Restrictions and Charges. Background Note by the Secretariat,’ MTN.GNG/NG2/W/40, 8 August 1989."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 2,
+      "blocks": [
+        {
+          "type": "header",
+          "index": 0,
+          "bbox": [
+            0.094,
+            0.053,
+            0.252,
+            0.067
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "WP 25-11 | MAY 2025"
+            }
+          ]
+        },
+        {
+          "type": "page_number",
+          "index": 1,
+          "bbox": [
+            0.892,
+            0.054,
+            0.906,
+            0.066
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "3"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 2,
+          "bbox": [
+            0.091,
+            0.1,
+            0.69,
+            0.134
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "as Biden administration National Security Advisor Jake Sullivan noted in an April 2023 speech:"
+            },
+            {
+              "type": "text",
+              "content": "5",
+              "styles": [
+                "superscript"
+              ]
+            }
+          ],
+          "continues_prev": true
+        },
+        {
+          "type": "text",
+          "index": 3,
+          "bbox": [
+            0.12,
+            0.145,
+            0.708,
+            0.253
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Economic integration didn’t stop China from expanding its military ambitions in the region or stop Russia from invading its democratic neighbors. Neither country had become more responsible or cooperative. And ignoring economic dependencies that had built up over the decades of liberalization had become really perilous—from energy uncertainty in Europe to supply-chain vulnerabilities in medical equipment, semiconductors, and critical minerals. These were the kinds of dependencies that could be exploited for economic or geopolitical leverage."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 4,
+          "bbox": [
+            0.091,
+            0.264,
+            0.741,
+            0.365
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Today, achieving even modest international cooperation between like-minded countries to discipline the extraordinary and sometimes disorderly use of tariffs, industrial policy, local (or preferential) content requirements, as well as invocations of exceptions for national security, will be more likely if their policymakers simultaneously grapple with the fundamental underlying fear of being cut off from supplies because of foreign use of export restrictions, even vis-à-vis each other."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 5,
+          "bbox": [
+            0.092,
+            0.366,
+            0.737,
+            0.553
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "The rest of this paper is organized as follows. Section 2 presents a simple three-country economic model to review how the fear of export restrictions is driving efforts to establish new sources of supply. It also explores the tradeoffs associated with different policy instruments deployed to create new supplies and reestablishes the basic theoretical case for mutual gains to like-minded countries from the adoption of disciplines to restrain their own use of export restrictions toward each other. Section 3 presents recent examples of vulnerabilities and policy actions taken by Europe, the United States (under both the Biden and Trump administrations), Japan, and other economies. Section 4 describes the GATT/World Trade Organization (WTO) rules on export restrictions as well as potential new disciplines emerging elsewhere. Section 5 concludes."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 6,
+          "bbox": [
+            0.092,
+            0.554,
+            0.739,
+            0.723
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Before moving on, it is important to clarify three points. First, the focus of this paper is on export restrictions for market dominance purposes, as opposed to export controls for dual-use goods. The former case refers to goods that, at least in theory, could be made anywhere, because the technology and production process are widely available, but are not made in a sufficiently diverse set of locations, perhaps because of the difficulty of overcoming established economic forces of agglomeration. In the latter case, it is technologically impossible for outsiders to produce the good, and the purpose of the export control is to limit the spread of the technology itself. (Put differently, this paper does not address the United States’ “small yard, high fence” policy."
+            },
+            {
+              "type": "text",
+              "content": "6",
+              "styles": [
+                "superscript"
+              ]
+            },
+            {
+              "type": "text",
+              "content": ")"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 7,
+          "bbox": [
+            0.091,
+            0.725,
+            0.742,
+            0.808
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Second, the paper often refers to “export restriction,” noting that such a policy could be imposed as either a quota (i.e., a volume limit, including a ban) or a duty (i.e., a tax, including at a prohibitive level). Most of the economic efficiency and incentive arguments explored below do not require distinguishing between quotas and duties."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 8,
+          "bbox": [
+            0.092,
+            0.81,
+            0.697,
+            0.843
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Third, at the time of writing, it was not clear whether the Trump administration would work with historical partners and allies on some of the"
+            }
+          ]
+        },
+        {
+          "type": "page_footnote",
+          "index": 9,
+          "bbox": [
+            0.091,
+            0.881,
+            0.706,
+            0.908
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "5 White House, ‘"
+            },
+            {
+              "type": "hyperlink",
+              "url": "https://bidenwhitehouse.archives.gov/briefing-room/speeches-remarks/2023/04/27/remarks-by-national-security-advisor-jake-sullivan-on-renewing-american-economic-leadership-at-the-brookings-institution/",
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Remarks by National Security Advisor Jake Sullivan on Renewing American Economic Leadership at the Brookings Institution"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "content": ",’ 27 April 2023."
+            }
+          ]
+        },
+        {
+          "type": "page_footnote",
+          "index": 10,
+          "bbox": [
+            0.091,
+            0.909,
+            0.705,
+            0.936
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "6 White House, ‘"
+            },
+            {
+              "type": "hyperlink",
+              "url": "https://bidenwhitehouse.archives.gov/briefing-room/speeches-remarks/2023/04/27/remarks-by-national-security-advisor-jake-sullivan-on-renewing-american-economic-leadership-at-the-brookings-institution/",
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Remarks by National Security Advisor Jake Sullivan on Renewing American Economic Leadership at the Brookings Institution"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "content": ",’ 27 April 2023."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "is_full_document": false,
+  "schema": "docvortex.middle",
+  "schema_version": "2.0"
+}

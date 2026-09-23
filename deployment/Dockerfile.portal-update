@@ -1,0 +1,4 @@
+# Reuse the verified CPU runtime and model layers; this release changes only the portal.
+FROM us-central1-docker.pkg.dev/project-6d7c1b56-cee5-450d-93e/cloud-run-source-deploy/pdf-to-html@sha256:9b9423753259b6932b9676bd83ba0058932278d5e617b08e9c4102e561c7cdd8
+COPY server.mjs pdf-backend.mjs share-backend.mjs ./
+COPY public/app.mjs public/site-math.mjs public/share.mjs public/shared.mjs public/shared.html public/index.html public/style.css ./public/

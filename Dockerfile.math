@@ -1,0 +1,28 @@
+FROM node:24-bookworm-slim AS web
+WORKDIR /build
+COPY package*.json build.mjs ocr-models.json THIRD_PARTY_NOTICES.md ./
+RUN npm ci --omit=dev && node build.mjs
+
+FROM python:3.10-slim-bookworm
+RUN apt-get update && apt-get install -y --no-install-recommends libgl1 libglib2.0-0 libgomp1 && rm -rf /var/lib/apt/lists/*
+COPY --from=web /usr/local/bin/node /usr/local/bin/node
+WORKDIR /app
+COPY requirements-pdf.txt ./
+RUN python -m venv /opt/parser && /opt/parser/bin/python -m pip install --no-cache-dir -r requirements-pdf.txt
+RUN python -m venv /opt/formula && /opt/formula/bin/python -m pip install --no-cache-dir --upgrade pip && /opt/formula/bin/python -m pip install --no-cache-dir torch==2.14.0+cpu torchvision==0.29.0+cpu --index-url https://download.pytorch.org/whl/cpu && /opt/formula/bin/python -m pip install --no-cache-dir transformers==4.57.6 accelerate==1.15.0 pillow==12.3.0
+COPY --chown=10001:10001 .pdf-runtime/models /opt/models
+COPY --chown=10001:10001 .pdf-runtime/formula-models /opt/formula-models
+COPY --from=web /build/public/vendor ./public/vendor
+COPY public ./public
+# Preserve only the previously deployed browser-only corrections. The automatic
+# backend does not use any document-specific correction catalog.
+COPY deployment/browser-only/ ./public/
+COPY server.mjs pdf-backend.mjs share-backend.mjs ./
+COPY scripts/parse-pdf.py scripts/pdf-heading-styles.py scripts/pdf-math-regions.py scripts/pdf-quality-pass.py scripts/refine-pdf-equations.py ./scripts/
+COPY THIRD_PARTY_NOTICES.md ./public/THIRD_PARTY_NOTICES.txt
+COPY licenses ./licenses
+RUN useradd --create-home --uid 10001 portal
+USER portal
+ENV PORT=8080 PDF_PARSER_PYTHON=/opt/parser/bin/python PDF_FORMULA_PYTHON=/opt/formula/bin/python MINERU_MODEL_BASE_DIR=/opt/models PDF_FORMULA_MODEL_CACHE=/opt/formula-models MINERU_MODEL_SOURCE=local MINERU_MODEL_SMALL_BACKEND=onnx MINERU_HOME=/tmp/mineru HF_HUB_OFFLINE=1 MINERU_INTRA_OP_NUM_THREADS=2 PDF_FORMULA_THREADS=2
+EXPOSE 8080
+CMD ["node", "server.mjs"]

@@ -1,0 +1,19 @@
+{
+  "steps": [
+    {
+      "name": "gcr.io/cloud-builders/docker",
+      "args": [
+        "build",
+        "-f",
+        "deployment/Dockerfile.image-update",
+        "-t",
+        "us-central1-docker.pkg.dev/project-6d7c1b56-cee5-450d-93e/cloud-run-source-deploy/pdf-to-html:word-images-captions-20260923",
+        "."
+      ]
+    }
+  ],
+  "images": [
+    "us-central1-docker.pkg.dev/project-6d7c1b56-cee5-450d-93e/cloud-run-source-deploy/pdf-to-html:word-images-captions-20260923"
+  ],
+  "timeout": "1200s"
+}
