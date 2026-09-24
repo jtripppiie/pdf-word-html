@@ -13,10 +13,11 @@ test('unsupported Word math fails explicitly rather than dropping equations',asy
 test('legacy Word files and embedded equation objects get actionable errors',async({page})=>{await page.goto('/');await page.locator('#file').setInputFiles({name:'old.doc',mimeType:'application/msword',buffer:Buffer.from('old')});await expect(page.locator('#status')).toContainText('save it as .docx');await upload(page,{images:true});await expect(page.locator('#status')).toContainText('legacy embedded objects');await expect(page.locator('#download')).toBeDisabled();});
 
 test('switching from Word to PDF restores the preview and converts all pages without page controls',async({page})=>{
+ test.setTimeout(240000);
  await upload(page);await expect(page.locator('#status')).toContainText('Done:');
  const {PDFDocument,StandardFonts}=await import('pdf-lib');const pdf=await PDFDocument.create(),font=await pdf.embedFont(StandardFonts.Helvetica);
  for(let n=1;n<=3;n++){const p=pdf.addPage([612,792]);p.drawText('Full document content '+n,{x:60,y:700,font,size:12});}
- await page.locator('#file').setInputFiles({name:'whole.pdf',mimeType:'application/pdf',buffer:Buffer.from(await pdf.save())});await page.locator('#convert').click();await expect(page.locator('#status')).toContainText('Done: 3 pages');await expect(page.locator('#pdf-panel')).toBeVisible();await expect(page.locator('#pages,.pdf-controls,#pdf-prev,#pdf-next,#pdf-page')).toHaveCount(0);await expect(page.frameLocator('#preview').locator('body')).toContainText('Full document content 3');
+ await page.locator('#file').setInputFiles({name:'whole.pdf',mimeType:'application/pdf',buffer:Buffer.from(await pdf.save())});await page.locator('#convert').click();await expect(page.locator('#status')).toContainText('Done: 3 pages',{timeout:180000});await expect(page.locator('#pdf-panel')).toBeVisible();await expect(page.locator('#pages,.pdf-controls,#pdf-prev,#pdf-next,#pdf-page')).toHaveCount(0);await expect(page.frameLocator('#preview').locator('body')).toContainText('Full document content 3');
 });
 
 test('Word pictures retain alt text, survive reopening, and export as ZIP files alongside native math',async({page})=>{

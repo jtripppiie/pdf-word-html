@@ -6,7 +6,7 @@ A minimal PDF/Word-to-HTML portal. In automatic mode, PDFs are processed on the 
 
 The default `npm start` runs the automatic PDF parser (the installed local parser and equation models are required; see setup below). `npm run start:math` remains an alias. Use `npm run start:browser` only for the older browser-only converter. The Google portal now runs the automatic parser; Word conversion remains browser-local in both modes.
 
-Live portal: https://pdf-to-html-250215174656.us-central1.run.app — revision `pdf-to-html-layout-122-20260924` (2026-09-24). Reconvert older saved PDF results to receive the new recognition, footnote recovery, and source chart/table images.
+Live portal: https://pdf-to-html-250215174656.us-central1.run.app — revision `pdf-to-html-word-123-20260924b` (2026-09-24). Reconvert older saved PDF results to receive the new recognition, footnote recovery, and source chart/table images.
 
 Use Node.js 22.13+ (Node 24 recommended).
 
@@ -148,3 +148,12 @@ The prepared release at `/tmp/pdf-italics-release-1.2.1` contains only the updat
 The conversion output now spans the full workspace row beneath history and upload settings. Mobile uses a single-column grid with no horizontal overflow. This release changes only the live HTML layout and stylesheet and retains the v1.2.1 parser/italics fix. Other pending local feature changes are not bundled into this design release.
 
 Cloud Build `fee753ed-a177-4e41-821d-2aa105ba9136` produced image `sha256:31d53deea3140276ef82215f695c9a14c84ee84e8c43bf3f57797d691f0b0067`. Revision `pdf-to-html-layout-122-20260924` receives 100% of public traffic and the `live` tag. Staged checks at 1440px and 390px verified full-row output, no overflow, Word conversion, editing and ZIP download. The generated PDF check also verified italic citation text and forward/back footnote links in preview and ZIP. Scripts: `scripts/check-layout-cloud.mjs` and `scripts/check-italics-cloud.mjs`.
+
+
+## Download Word 1.2.3 (live September 24, 2026)
+
+Download Word is available beside Download ZIP for converted PDFs and Word files, including reopened saved conversions. It generates a browser-local DOCX containing editable text and TeX, emphasis, embedded images, and native footnotes. The output includes the publication-import metadata/body markers. Native footnote numbering and image relationships are included; no Microsoft Word desktop validation was performed. Refresh the portal to load the new button.
+
+Nine local Word import/export/ZIP tests passed. The exact release files passed the export/reimport test against existing live assets, and eight staged browser tests passed along with desktop/mobile layout checks. The staged Word-to-PDF test initially hit its browser-oriented five-second limit; its retry encountered the server busy state after the interrupted conversion. A fresh staging revision then passed a complete generated PDF conversion and verified both ZIP and DOCX downloads with italic citation text and forward/back footnote links. The test timeout now allows cloud recognition time.
+
+Cloud Build `64f3aae6-4f0c-4e85-a5d1-68fc007350ee` produced image `sha256:d33e9994d1c34b19005c3291c21b70e3a9a69e03e159d32aff42ea9dc167f6ff`. Revision `pdf-to-html-word-123-20260924b` receives 100% of traffic and the live tag. This release layers the Word export module and its button wiring onto the v1.2.2 production assets; PDF parser and full-width layout are preserved. Pending local review/classification/backend changes remain separate from the deployed feature set.

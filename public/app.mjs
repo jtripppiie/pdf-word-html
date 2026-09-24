@@ -35,7 +35,7 @@ function status(message,error=false){$('status').textContent=message;$('status')
 function historyStatus(message,error=false){$('history-status').textContent=message;$('history-status').classList.toggle('error',error);}
 const isWord=()=>/\.docx$/i.test(selectedFile?.name||'');
 function updateFormat(){const word=isWord();$('word-hint').hidden=!word;$('pdf-math-options').hidden=word||structuredPdf;$('recognize-math').disabled=busy||word||structuredPdf;$('pdf-panel').hidden=word;$('review').classList.toggle('word-review',word);$('sync-scroll').closest('label').hidden=word;}
-function setBusy(value){busy=value;for(const id of ['file','new-conversion','recognize-math','equation-apply','equation-choice','equation-tex'])$(id).disabled=value;$('convert').disabled=value||!selectedFile;$('source').disabled=value;$('share').disabled=value||!html.trim();$('history-list').querySelectorAll('button').forEach(button=>button.disabled=value);updateFormat();}
+function setBusy(value){busy=value;for(const id of ['file','new-conversion','recognize-math','equation-apply','equation-choice','equation-tex'])$(id).disabled=value;$('convert').disabled=value||!selectedFile;$('source').disabled=value;$('share').disabled=value||!html.trim();$('download-word').disabled=value||!html.trim();$('history-list').querySelectorAll('button').forEach(button=>button.disabled=value);updateFormat();}
 function setView(next){
  view=next;
  for(const name of ['preview','source','check'])$('show-'+name).classList.toggle('active',name===next);
@@ -238,7 +238,7 @@ $('download').onclick=async()=>{
  finally{$('download').disabled=!html.trim();}
 };
 $('download-word').onclick=async()=>{
- if(!html)return;$('download-word').disabled=true;$('download-word').textContent='Preparing…';
+ if(!html||busy)return;$('download-word').disabled=true;$('download-word').textContent='Preparing…';
  try{const output=await createDownloadDocx(html,selectedFile?.name);const url=URL.createObjectURL(output.blob),link=document.createElement('a');link.href=url;link.download=output.name;link.click();setTimeout(()=>URL.revokeObjectURL(url),10000);}
  catch(error){status(error.message||'Could not create the Word download.',true);}
  finally{$('download-word').textContent='Download Word';$('download-word').disabled=!html.trim();}

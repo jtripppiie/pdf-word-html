@@ -16,5 +16,13 @@ try{
  const download=page.waitForEvent('download');await page.locator('#download').click();const file=await download;
  const zip=await JSZip.loadAsync(await readFile(await file.path()));const exported=await zip.file('italics-smoke.html').async('string');
  if(!exported.includes('<em>Journal of Economic History</em>'))throw Error('ZIP lost italics');
+ if(await page.locator('#download-word').count()){
+  const wordEvent=page.waitForEvent('download');await page.locator('#download-word').click();const word=await wordEvent;
+  const wordZip=await JSZip.loadAsync(await readFile(await word.path()));
+  const notes=await wordZip.file('word/footnotes.xml').async('string');
+  const body=await wordZip.file('word/document.xml').async('string');
+  if(!notes.includes('<w:i/>')||!notes.includes('Journal of Economic History')||!notes.includes('<w:footnoteRef/>')||!body.includes('w:footnoteReference'))throw Error('PDF-to-Word lost italic footnote formatting');
+  audit.wordDownload=word.suggestedFilename();
+ }
  await writeFile('output/italics-smoke.html',html);await writeFile('output/italics-smoke-audit.json',JSON.stringify(audit,null,2));console.log(JSON.stringify(audit));
 }finally{await browser.close();}

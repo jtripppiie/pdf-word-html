@@ -1,0 +1,2 @@
+FROM us-central1-docker.pkg.dev/project-6d7c1b56-cee5-450d-93e/cloud-run-source-deploy/pdf-to-html@sha256:31d53deea3140276ef82215f695c9a14c84ee84e8c43bf3f57797d691f0b0067
+COPY public/index.html public/app.mjs public/download-docx.mjs ./public/

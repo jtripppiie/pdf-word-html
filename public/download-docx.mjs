@@ -2,8 +2,8 @@
 // The importer reads: an "Article body"/"End of article body" boundary, Heading1-6
 // and Quote paragraph styles, list numbering, standard Word tables, inline images
 // (with an optional "Image filename:" instruction), typed MathJax as literal
-// \(...\)/\[...\] text, and native Word footnotes. We emit exactly those shapes so a
-// round trip stays lossless. Runs entirely in the browser; no server or paid service.
+// \(...\)/\[...\] text, and native Word footnotes. We emit exactly those shapes for the
+// publication workflow. Runs entirely in the browser; no server or paid service.
 let zipReady;
 async function getZip(){
  if(window.JSZip)return window.JSZip;
@@ -220,14 +220,15 @@ function numberingXml(defs){
 
 function footnotesXml(usedNotes,noteMap,ctx){
  // Footnote hyperlinks reference their own rels part, so give them an isolated context.
- const fnCtx={imageMap:ctx.imageMap,usedNotes:ctx.usedNotes,rels:[],relCounter:1,plainLinks:false};
+ const imageRels=ctx.rels.filter(rel=>rel.includes('/relationships/image'));
+ const fnCtx={imageMap:ctx.imageMap,usedNotes:ctx.usedNotes,rels:[...imageRels],relCounter:ctx.relCounter,plainLinks:false};
  let notes='';
  for(const id of [...usedNotes].sort((a,b)=>Number(a)-Number(b))){
   const node=noteMap.get(id);
   const runs=node?inlineRuns(node,{},fnCtx):runXml('',{});
-  notes+=`<w:footnote w:id="${id}"><w:p>${runs||'<w:r><w:t/></w:r>'}</w:p></w:footnote>`;
+  notes+=`<w:footnote w:id="${id}"><w:p><w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:footnoteRef/></w:r>${runs||'<w:r><w:t/></w:r>'}</w:p></w:footnote>`;
  }
- const xml=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:footnotes xmlns:w="${W}" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">`
+ const xml=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:footnotes xmlns:w="${W}" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">`
   +`<w:footnote w:type="separator" w:id="-1"><w:p><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:separator/></w:r></w:p></w:footnote>`
   +`<w:footnote w:type="continuationSeparator" w:id="0"><w:p><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:continuationSeparator/></w:r></w:p></w:footnote>`
   +notes+`</w:footnotes>`;
