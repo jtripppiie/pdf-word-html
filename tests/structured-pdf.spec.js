@@ -151,3 +151,24 @@ test('PDF images use their own captions, retain visible captions, and fall back 
  });
  await page.setContent(html);await expect(page.locator('img').nth(0)).toHaveAttribute('alt','Figure 3. Trade growth');await expect(page.locator('img').nth(1)).toHaveAttribute('alt','Figure from PDF page 1');await expect(page.locator('p').filter({hasText:'Figure 3. Trade growth'})).toHaveCount(1);
 });
+
+test('italic footnote phrases survive rendering and ZIP export with working note links',async({page})=>{
+ await page.goto('/');
+ const result=await page.evaluate(async()=>{
+  const {structuredPdfHtml}=await import('/structured-pdf.mjs');
+  const {createDownloadZip}=await import('/download-zip.mjs');
+  const result=structuredPdfHtml({schema:'docvortex.middle',pages:[{page_idx:0,blocks:[
+   {type:'text',content:[{type:'text',content:'Read the citation.'},{type:'hyperlink',url:'#note',content:[]}]},
+   {type:'page_footnote',anchor:'note',content:[{type:'text',content:'1 See '},{type:'text',content:'Journal of Economic History',styles:['italic']},{type:'text',content:', volume 12.'}]}
+  ]}]});
+  const zip=await createDownloadZip(result.html,'italics.pdf');
+  const parsed=await window.JSZip.loadAsync(zip.blob);
+  return {html:result.html,exported:await parsed.file('italics.html').async('string')};
+ });
+ await page.setContent(result.html);
+ await expect(page.locator('p').last().locator('em')).toHaveText('Journal of Economic History');
+ await expect(page.locator('#_ftnref1')).toHaveAttribute('href','#_ftn1');
+ await expect(page.locator('#_ftn1')).toHaveAttribute('href','#_ftnref1');
+ expect(result.exported).toContain('<em>Journal of Economic History</em>');
+ expect(result.exported).not.toContain('<em>1 See');
+});

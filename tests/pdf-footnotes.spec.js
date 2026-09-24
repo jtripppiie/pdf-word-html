@@ -4,6 +4,16 @@ import JSZip from 'jszip';
 test('automatic PDF preserves source chart/table images, linked notes, and saved history',async({page})=>{
  test.setTimeout(60000);
  const result=JSON.parse(await readFile('tests/fixtures/wp26-1-automatic.json','utf8'));
+ const expectedImages=[];
+ const textOf=block=>typeof block.content==='string'?block.content:(block.content||[]).map(textOf).join('');
+ for(const pageData of result.pages)for(const block of pageData.blocks){
+  if(!['table','chart','image'].includes(block.type)||!Array.isArray(block.content))continue;
+  const caption=block.content.filter(child=>child.type===`${block.type}_caption`).map(textOf).join(' ').replace(/\s+/g,' ').trim();
+  for(const child of block.content)if(child.type===`${block.type}_body`)expectedImages.push({type:block.type,alt:caption||`${block.type==='table'?'Table':block.type==='chart'?'Chart':'Figure'} from PDF page ${pageData.page_idx+1}`});
+ }
+ expect(expectedImages.filter(i=>i.type==='table')).toHaveLength(4);
+ expect(expectedImages.filter(i=>i.type==='chart')).toHaveLength(41);
+ expect(expectedImages.filter(i=>i.type==='image')).toHaveLength(1);
  const table=result.pages.flatMap(p=>p.blocks).find(b=>b.type==='table');table.content.find(b=>b.type==='table_body').content='<table><tr><td>INCORRECT RECOGNIZED TABLE VALUE</td></tr></table>';
  await page.route('**/api/capabilities',r=>r.fulfill({json:{structuredPdf:true}}));
  await page.route('**/api/convert-pdf',r=>r.fulfill({contentType:'application/x-ndjson',body:JSON.stringify({result})+'\n'}));
@@ -18,10 +28,9 @@ test('automatic PDF preserves source chart/table images, linked notes, and saved
  await expect(frame.locator('h2').filter({hasText:/^Foreign Direct Investment$/})).toHaveCount(0);
  await expect(frame.locator('h2').filter({hasText:/^1\. Introduction$/})).toHaveCount(1);
  await expect(frame.locator('a[id^="_ftnref"]')).toHaveCount(25);
- await expect(frame.locator('img[alt^="Table from PDF"]')).toHaveCount(4);
- await expect(frame.locator('img[alt^="Chart from PDF"]')).toHaveCount(41);
- await expect(frame.locator('img[alt^="Figure from PDF"]')).toHaveCount(1);
- await expect(frame.locator('p').filter({hasText:/^Figure 3\. Convergence in output per capita$/}).locator('xpath=following-sibling::*[1]/img')).toHaveAttribute('alt','Chart from PDF page 54');
+ await expect(frame.locator('img')).toHaveCount(46);
+ expect(await frame.locator('img').evaluateAll(images=>images.map(image=>image.alt).sort())).toEqual(expectedImages.map(image=>image.alt).sort());
+ await expect(frame.locator('p').filter({hasText:/^Figure 3\. Convergence in output per capita$/}).locator('xpath=following-sibling::*[1]/img')).toHaveAttribute('alt','Figure 3. Convergence in output per capita');
  await expect(frame.locator('table')).toHaveCount(0);
  await expect(frame.locator('body')).not.toContainText('INCORRECT RECOGNIZED TABLE VALUE');
  await expect.poll(()=>frame.locator('img').first().evaluate(img=>img.complete&&img.naturalWidth>img.width)).toBe(true);
@@ -44,9 +53,8 @@ test('automatic PDF preserves source chart/table images, linked notes, and saved
  const exported=await zip.file('wp26-1.html').async('string');expect(exported).toContain('src="images/chart-');expect(exported).not.toContain('data:image/');
  await page.reload();await page.locator('.open-saved').first().click();
  await expect(frame.locator('a[id^="_ftnref"]')).toHaveCount(25);
- await expect(frame.locator('img[alt^="Table from PDF"]')).toHaveCount(4);
- await expect(frame.locator('img[alt^="Chart from PDF"]')).toHaveCount(41);
- await expect(frame.locator('img[alt^="Figure from PDF"]')).toHaveCount(1);
+ await expect(frame.locator('img')).toHaveCount(46);
+ expect(await frame.locator('img').evaluateAll(images=>images.map(image=>image.alt).sort())).toEqual(expectedImages.map(image=>image.alt).sort());
  await expect(frame.locator('table')).toHaveCount(0);
  await expect(frame.locator('body')).not.toContainText('INCORRECT RECOGNIZED TABLE VALUE');
  await expect.poll(()=>frame.locator('img').first().evaluate(img=>img.complete&&img.naturalWidth>img.width)).toBe(true);

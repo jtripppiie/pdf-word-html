@@ -1,5 +1,7 @@
 """Correct italic-only heading guesses using the original PDF's font evidence."""
 import ctypes
+import unicodedata
+from difflib import SequenceMatcher
 import math
 import re
 from collections import Counter
@@ -60,10 +62,91 @@ def correct_page(blocks,runs):
             for span in block.get('content',[]):
                 if span.get('type')=='text' and 'italic' not in span.get('styles',[]):span['styles']=[*span.get('styles',[]),'italic']
 
+def normalized_chars(text):
+    chars=[];offsets=[]
+    for i,char in enumerate(text):
+        for normalized in unicodedata.normalize('NFKC',char).casefold():
+            if normalized.isalnum():chars.append(normalized);offsets.append(i)
+    return ''.join(chars),offsets
+
+
+def recover_italics(blocks,runs):
+    """Transfer only complete, confidently aligned native italic runs.
+
+    Split text spans without rewriting text, links, existing styles or math.
+    Ambiguous/unreadable source text is left unchanged.
+    """
+    for block in blocks:
+        content=block.get('content')
+        if not isinstance(content,list):continue
+        if block.get('type') in ('table','chart','image','list','index'):
+            recover_italics(content,runs);continue
+        if block.get('type') in ('header','footer','page_number','equation'):continue
+        native=[r for r in runs if inside(r,block.get('bbox'))]
+        if not any(r['italic'] for r in native):continue
+        leaves=[]
+        def collect(spans):
+            for span in spans:
+                if span.get('type')=='hyperlink':collect(span.get('content',[]))
+                elif span.get('type')=='text':leaves.append(span)
+                else:leaves.append(None)  # Math/code are never styled by this pass.
+        collect(content)
+        target='';positions={}
+        for span in leaves:
+            if span is None:target+='\0';continue
+            positions[id(span)]=len(target);target+=span.get('content','')
+        target_key,offsets=normalized_chars(target)
+        source_key='';italic_ranges=[]
+        for run in native:
+            key,_=normalized_chars(run['text']);start=len(source_key);source_key+=key
+            if run['italic'] and len(key)>=2:italic_ranges.append((start,len(source_key)))
+        if not source_key or not target_key:continue
+        # Bound expensive matching on malformed/pathological blocks.
+        if max(len(source_key),len(target_key))>20000:continue
+        matcher=SequenceMatcher(None,source_key,target_key,autojunk=False)
+        if matcher.ratio()<.9:continue
+        mapping={}
+        for match in matcher.get_matching_blocks():
+            for i in range(match.size):mapping[match.a+i]=match.b+i
+        selected=set()
+        for start,end in italic_ranges:
+            mapped=[mapping.get(i) for i in range(start,end)]
+            if any(i is None for i in mapped):continue
+            if mapped!=list(range(mapped[0],mapped[0]+len(mapped))):continue
+            # Require unique matched context to avoid styling a repeated word
+            # whose source location cannot be established.
+            left=max(0,start-16);right=min(len(source_key),end+16)
+            while left<start and mapping.get(left)!=mapped[0]-(start-left):left+=1
+            while right>end and mapping.get(right-1)!=mapped[-1]+(right-end):right-=1
+            context=source_key[left:right]
+            if source_key.count(context)!=1 or target_key.count(context)!=1:continue
+            first,last=offsets[mapped[0]],offsets[mapped[-1]]+1
+            if '\0' not in target[first:last]:selected.update(range(first,last))
+        def split(spans):
+            output=[]
+            for span in spans:
+                if span.get('type')=='hyperlink':
+                    span['content']=split(span.get('content',[]));output.append(span);continue
+                if span.get('type')!='text' or 'italic' in span.get('styles',[]):output.append(span);continue
+                text=span.get('content','');base=positions[id(span)]
+                if not text:output.append(span);continue
+                start=0;styled=base in selected
+                for end in range(1,len(text)+1):
+                    following=base+end in selected if end<len(text) else not styled
+                    if following==styled:continue
+                    part={**span,'content':text[start:end]}
+                    if styled:part['styles']=[*span.get('styles',[]),'italic']
+                    output.append(part);start=end;styled=following
+            return output
+        block['content']=split(content)
+
+
 def correct_headings(source,payload):
     with pdfium.PdfDocument(source) as pdf:
         for entry in payload['pages']:
-            if not any(b['type']=='paragraph_title' for b in entry['blocks']):continue
             page=pdf[entry['page_idx']]
-            try:correct_page(entry['blocks'],source_runs(page))
+            try:
+                runs=source_runs(page)
+                correct_page(entry['blocks'],runs)
+                recover_italics(entry['blocks'],runs)
             finally:page.close()

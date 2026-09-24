@@ -1,0 +1,2 @@
+FROM us-central1-docker.pkg.dev/project-6d7c1b56-cee5-450d-93e/cloud-run-source-deploy/pdf-to-html@sha256:2ee9e2d8e9d546900559d04368212569995019b8bf22d7ed9ddf17a12bca93ca
+COPY public/index.html public/style.css ./public/

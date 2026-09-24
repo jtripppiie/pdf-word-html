@@ -3,10 +3,13 @@ import {spawn} from 'node:child_process';
 import {mkdtemp,writeFile,readFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join,resolve} from 'node:path';
+import {randomUUID} from 'node:crypto';
+import {validateParserOutput} from './pdf-validator.mjs';
 let occupied=false;
 let activeChild;
 const python=process.env.PDF_PARSER_PYTHON;
-function stopChild(child){if(!child?.pid)return;try{if(process.platform==='win32')child.kill('SIGTERM');else process.kill(-child.pid,'SIGTERM');}catch{}}
+function log(fields){process.stdout.write(JSON.stringify({ts:new Date().toISOString(),component:'pdf-backend',...fields})+'\n');}
+function stopChild(child){if(!child?.pid)return;const pid=child.pid;const kill=signal=>{try{if(process.platform==='win32')child.kill(signal);else process.kill(-pid,signal);}catch{}};kill('SIGTERM');setTimeout(()=>kill('SIGKILL'),5000).unref();}
 if(python)for(const signal of ['SIGINT','SIGTERM'])process.once(signal,()=>{stopChild(activeChild);process.exit(0);});
 export async function pdfBackend(req,res) {
   const pathname=new URL(req.url,'http://localhost').pathname;
@@ -18,8 +21,8 @@ export async function pdfBackend(req,res) {
   if(!python){res.writeHead(503);res.end('The automatic PDF parser is not configured.');return true;}
   if(req.method!=='POST'){res.writeHead(405);res.end();return true;}
   if(req.headers['content-type']!=='application/pdf'){res.writeHead(415);res.end('Expected a PDF.');return true;}
-  if(occupied){res.writeHead(409);res.end('Another PDF is being converted. Try again when it finishes.');return true;}
-  occupied=true;let directory,child,timer,disconnected=false;
+  if(occupied){log({event:'convert.busy'});res.writeHead(409);res.end('Another PDF is being converted. Try again when it finishes.');return true;}
+  occupied=true;const jobId=randomUUID(),jobStart=Date.now();let directory,child,timer,disconnected=false;
   const abort=()=>{disconnected=true;stopChild(child);};
   res.on('close',abort);
   const send=value=>{if(!res.destroyed)res.write(JSON.stringify(value)+'\n');};
@@ -31,7 +34,8 @@ export async function pdfBackend(req,res) {
     directory=await mkdtemp(join(tmpdir(),'pdf-html-'));
     const input=join(directory,'input.pdf'),output=join(directory,'result.json');
     await writeFile(input,bytes);
-    if(disconnected)return true;
+    if(disconnected){log({event:'convert.disconnect',jobId,ms:Date.now()-jobStart});return true;}
+    log({event:'convert.start',jobId,bytes:bytes.length});
     res.writeHead(200,{'Content-Type':'application/x-ndjson','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});
     send({status:'Opening the PDF for automatic math recognition…'});
     child=spawn(python,[resolve('scripts/parse-pdf.py'),input,output],{detached:process.platform!=='win32',stdio:['ignore','pipe','pipe'],env:{...process.env,PYTHONUNBUFFERED:'1'}});activeChild=child;
@@ -43,13 +47,18 @@ export async function pdfBackend(req,res) {
       if(window)send({status:`Recognizing pages ${window[3]} of ${window[4]} (batch ${window[1]} of ${window[2]})…`});
     });
     timer=setInterval(()=>send({elapsed:Math.round((Date.now()-started)/1000)}),15000);
-    const timeout=setTimeout(()=>{lastError='PDF conversion exceeded the 60-minute limit.';stopChild(child);},60*60*1000);
+    const timeout=setTimeout(()=>{lastError='PDF conversion exceeded the 60-minute limit.';log({event:'convert.timeout',jobId,ms:Date.now()-jobStart});stopChild(child);},60*60*1000);
     let code;
     try{code=await new Promise((resolve,reject)=>{child.once('error',reject);child.once('close',resolve);});}finally{clearTimeout(timeout);}
-    if(disconnected)return true;
+    if(disconnected){log({event:'convert.disconnect',jobId,ms:Date.now()-jobStart});return true;}
     if(code!==0)throw Error(lastError||'Automatic PDF recognition failed.');
-    send({result:JSON.parse(await readFile(output,'utf8'))});
-  }catch(error){if(!res.headersSent)res.writeHead(500,{'Content-Type':'application/x-ndjson'});send({error:error.message||'PDF conversion failed.'});}
+    const result=JSON.parse(await readFile(output,'utf8'));
+    let validation;try{validation=validateParserOutput(result);}catch(error){validation={ok:true,severity:{error:0,warning:0,info:0},issues:[],error:error.message};}
+    log({event:'convert.validation',jobId,ok:validation.ok,severity:validation.severity,counts:validation.counts,samples:validation.issues.slice(0,5)});
+    send({validation});
+    send({result});
+    log({event:'convert.success',jobId,ms:Date.now()-jobStart});
+  }catch(error){log({event:'convert.error',jobId,ms:Date.now()-jobStart,error:error.message||'PDF conversion failed.'});if(!res.headersSent)res.writeHead(500,{'Content-Type':'application/x-ndjson'});send({error:error.message||'PDF conversion failed.'});}
   finally{clearInterval(timer);res.off('close',abort);activeChild=null;if(directory)await rm(directory,{recursive:true,force:true});occupied=false;if(!res.destroyed)res.end();}
   return true;
 }

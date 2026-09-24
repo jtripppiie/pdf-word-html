@@ -1,5 +1,6 @@
 import {publishShare,revokeShare} from './share.mjs';
 import { createDownloadZip } from './download-zip.mjs';
+import { createDownloadDocx } from './download-docx.mjs';
 import { attachPdfSnapshots } from './pdf-snapshots.mjs';
 import { nativeNoteReferences } from './pdf-note-references.mjs';
 import { siteMathHtml } from './site-math.mjs';
@@ -14,6 +15,8 @@ import { extractPage, documentHtml, parsePages } from './extract.mjs';
 import { saveConversion, readConversion, deleteConversion, listConversions } from './history.mjs';
 import { PdfViewer } from './viewer.mjs';
 import { compareText } from './compare.mjs';
+import { reviewReport } from './review-report.mjs';
+import { classifyCheck, checkVerdict } from './check-classify.mjs';
 import { ScrollSync } from './scroll-sync.mjs';
 import { setupFullscreen } from './fullscreen.mjs';
 const $=id=>document.getElementById(id);
@@ -21,7 +24,7 @@ let selectedFile,html='',busy=false,view='preview',activeRecord=null;
 let pdfjsPromise,previewUrl,saveQueue=Promise.resolve(),currentPdfPage=1,stopMath=false;
 let structuredPdf=false;
 let conversionAbort;
-const capabilities=fetch('/api/capabilities').then(r=>r.ok?r.json():{}).then(value=>{structuredPdf=!!value.structuredPdf;updateFormat();if(structuredPdf){$('privacy-note').textContent='PDFs are processed by this portal’s automatic recognition engine and removed from the server after conversion. Saved conversions stay in this browser. Word files convert on your device. Equations are exported as editable TeX. PDF recognition uses ';const credit=document.createElement('a');credit.href='https://github.com/opendatalab/MinerU';credit.textContent='MinerU';$('privacy-note').append(credit,'.');}}).catch(()=>{});
+const capabilities=fetch('/api/capabilities').then(r=>r.ok?r.json():{}).then(value=>{structuredPdf=!!value.structuredPdf;updateFormat();}).catch(()=>{});
 const isHtmlFullscreen=setupFullscreen($('html-panel'),$('fullscreen-html'),$('preview'));
 const viewer=new PdfViewer($('pdf-scroll'),$('pdf-status'),position=>{updatePageControls(position.number);sync.fromPdf(position);});
 const sync=new ScrollSync({iframe:$('preview'),viewer,enabled:$('sync-scroll'),isPreview:()=>view==='preview'&&!isHtmlFullscreen(),onPage:updatePageControls});
@@ -36,7 +39,7 @@ function setBusy(value){busy=value;for(const id of ['file','new-conversion','rec
 function setView(next){
  view=next;
  for(const name of ['preview','source','check'])$('show-'+name).classList.toggle('active',name===next);
- $('review').hidden=!html||next==='check';$('empty').hidden=!!html;
+ $('review').hidden=!html||next==='check';
  $('source').hidden=next!=='source';$('preview').hidden=next!=='preview'||!html;
  $('text-check').hidden=next!=='check'||!html;
  $('sync-scroll').disabled=isWord()||next!=='preview'||!html;
@@ -47,8 +50,9 @@ function setView(next){
  }
  if(next==='check'&&html)renderCheck();
 }
-function clearOutput(){$('share-panel').hidden=true;$('share').disabled=true;$('conversion-warning').textContent='';$('equation-review').hidden=true;$('download').textContent='Download ZIP';$('math-status').textContent='';html='';$('source').value='';$('preview').removeAttribute('src');if(previewUrl)URL.revokeObjectURL(previewUrl);previewUrl=null;$('download').disabled=true;$('show-check').disabled=true;setView('preview');}
-function showOutput(){$('share').disabled=busy||!activeRecord.html.trim();showShare();updateFormat();$('conversion-warning').textContent=(activeRecord.warnings||[]).join(' ');html=activeRecord.html;updateMathReview();$('source').value=html;$('download').disabled=!html.trim();$('show-check').disabled=!activeRecord.sourcePages?.length;setView('preview');}
+let reviewTimer;
+function clearOutput(){clearTimeout(reviewTimer);$('review-summary').textContent='';$('share-panel').hidden=true;$('share').disabled=true;$('conversion-warning').textContent='';$('equation-review').hidden=true;$('download').textContent='Download ZIP';$('math-status').textContent='';html='';$('source').value='';$('preview').removeAttribute('src');if(previewUrl)URL.revokeObjectURL(previewUrl);previewUrl=null;$('download').disabled=true;$('download-word').disabled=true;$('show-check').disabled=true;setView('preview');}
+function showOutput(){$('share').disabled=busy||!activeRecord.html.trim();showShare();updateFormat();$('conversion-warning').textContent=(activeRecord.warnings||[]).join(' ');html=activeRecord.html;updateMathReview();$('source').value=html;$('download').disabled=!html.trim();$('download-word').disabled=!html.trim();$('show-check').disabled=!activeRecord.sourcePages?.length;setView('preview');refreshReviewReport();}
 async function refreshHistory(){
  try{
   const records=await listConversions();$('history-list').replaceChildren();
@@ -111,9 +115,49 @@ async function openSaved(id){
   await refreshHistory();
  }catch(error){status(error.message,true);}finally{setBusy(false);}
 }
+function refreshReviewReport(){
+ clearTimeout(reviewTimer);
+ $('review-issues').replaceChildren();$('review-pages').replaceChildren();
+ if(!activeRecord?.sourcePages?.length){$('review-summary').textContent='';return;}
+ try{
+  const report=reviewReport(activeRecord.sourcePages,html);
+  if(report.issues.length){
+   const by={};for(const item of report.issues)by[item.kind]=(by[item.kind]||0)+1;
+   const label={passage:'passage differences (usually equations, figures, or removed headers)',duplicate:'repeated paragraphs',link:'broken links',note:'note-anchor problems'};
+   const parts=Object.entries(by).sort((a,b)=>b[1]-a[1]).map(([kind,count])=>`${count} ${label[kind]||kind}`);
+   $('review-summary').textContent=`Automatic review: ${report.issues.length} items to inspect in Text check (${parts.join(', ')}). Passage differences are usually benign — check broken links and note-anchor problems first. Downloads remain available.`;
+  }else{
+   $('review-summary').textContent='Automatic review: no passage or link issues detected. This does not verify reading order, images, or mathematical accuracy.';
+  }
+  if(!report.pages.some(page=>page.checked))$('review-summary').textContent+=' Not enough extracted PDF text for passage checks.';
+  $('review-context').textContent=`Passages are compared with extracted PDF text, which can itself be incomplete. Removed headers, moved notes, and equations can cause differences.${report.images?' This output contains images; text inside chart or table images is not checked.':''} Nothing is removed or repaired by this report.`;
+  for(const item of report.issues.slice(0,100)){
+   const li=document.createElement('li');li.textContent=item.message+(item.excerpt?`: “${item.excerpt}…”`:'');
+   if(item.page){const button=document.createElement('button');button.className='word-page';button.textContent=`PDF p. ${item.page}`;button.onclick=()=>{setView('preview');showPdfPage(item.page);};li.append(button);}
+   $('review-issues').append(li);
+  }
+  if(!report.issues.length){const li=document.createElement('li');li.textContent='No issues detected by these checks.';$('review-issues').append(li);}
+  if(report.issues.length>100){const li=document.createElement('li');li.textContent=`Showing 100 of ${report.issues.length} review items.`;$('review-issues').append(li);}
+  for(const item of report.pages){
+   const li=document.createElement('li');li.textContent=`Page ${item.page}: `+(item.checked?`${item.matched} of ${item.checked} sampled phrases found somewhere in the HTML.`:'Not enough extracted text for passage checks.');$('review-pages').append(li);
+  }
+ }catch{$('review-summary').textContent='Automatic review could not finish. Conversion and download remain available.';}
+}
 function renderCheck(){
+ refreshReviewReport();
  const {missing,added}=compareText(activeRecord?.sourcePages||[],html);
  $('check-summary').textContent=`${missing.reduce((n,item)=>n+item.count,0)} word occurrences fewer in HTML; ${added.reduce((n,item)=>n+item.count,0)} extra. These are review prompts, not a conversion accuracy score.`;
+ const groups=classifyCheck({missing,added});
+ $('check-verdict').textContent=checkVerdict(groups);
+ const notableList=$('notable-words');notableList.replaceChildren();
+ if(!groups.notable.length){const li=document.createElement('li');li.textContent='Nothing left once math, numbers, and removed page furniture are set aside.';notableList.append(li);}
+ for(const item of groups.notable.slice(0,50)){
+  const li=document.createElement('li');
+  li.textContent=`${item.word} — ${item.count} ${item.direction==='fewer'?'fewer in HTML':'extra in HTML'}`;
+  if(item.pages&&item.pages.length){const button=document.createElement('button');button.className='word-page';button.textContent=`PDF p. ${item.pages.join(', ')}`;button.title='Open the first PDF page containing this word';button.onclick=()=>{setView('preview');showPdfPage(item.pages[0]);};li.append(button);}
+  notableList.append(li);
+ }
+ if(groups.notable.length>50){const li=document.createElement('li');li.textContent=`Showing the first 50 of ${groups.notable.length} plain-word differences.`;notableList.append(li);}
  for(const [id,items] of [['missing-words',missing],['added-words',added]]){
   $(id).replaceChildren();
   if(!items.length){const li=document.createElement('li');li.textContent='None found.';$(id).append(li);}
@@ -131,7 +175,7 @@ for(const name of ['dragleave','drop'])$('drop').addEventListener(name,event=>{e
 $('drop').addEventListener('drop',event=>choose(event.dataTransfer.files[0]));
 $('new-conversion').onclick=async()=>{if(busy)return;setBusy(true);await saveQueue;await capabilities;await reset();await refreshHistory();setBusy(false);};
 for(const name of ['preview','source','check'])$('show-'+name).onclick=()=>setView(name);
-$('source').addEventListener('input',()=>{html=$('source').value;$('download').disabled=!html.trim();updateMathReview();persistActive();});
+$('source').addEventListener('input',()=>{html=$('source').value;$('download').disabled=!html.trim();$('download-word').disabled=!html.trim();updateMathReview();clearTimeout(reviewTimer);reviewTimer=setTimeout(refreshReviewReport,350);persistActive();});
 $('stop-math').onclick=()=>{if(conversionAbort){conversionAbort.abort();status('Cancelling conversion…');return;}stopMath=true;cancelRecognition();$('stop-math').hidden=true;status('Stopping math recognition; remaining expressions will be marked for transcription.');};
 $('convert').onclick=()=>convertDocument();
 export async function convertDocument(range=''){
@@ -193,6 +237,12 @@ $('download').onclick=async()=>{
  catch(error){status(error.message||'Could not create the ZIP download.',true);}
  finally{$('download').disabled=!html.trim();}
 };
+$('download-word').onclick=async()=>{
+ if(!html)return;$('download-word').disabled=true;$('download-word').textContent='Preparing…';
+ try{const output=await createDownloadDocx(html,selectedFile?.name);const url=URL.createObjectURL(output.blob),link=document.createElement('a');link.href=url;link.download=output.name;link.click();setTimeout(()=>URL.revokeObjectURL(url),10000);}
+ catch(error){status(error.message||'Could not create the Word download.',true);}
+ finally{$('download-word').textContent='Download Word';$('download-word').disabled=!html.trim();}
+};
 refreshHistory().then(()=>{if($('history-status').textContent==='Loading history…')historyStatus('Choose a saved conversion to reopen it.');});
 
 function updateMathReview(){
@@ -216,6 +266,6 @@ $('equation-apply').onclick=async()=>{
  const id=$('equation-choice').value,item=activeRecord?.mathReview?.find(item=>item.id===id);if(!item||busy)return;
  const tex=$('equation-tex').value.trim();if(!tex){$('equation-message').textContent='Enter the equation’s TeX first.';return;}
  setBusy(true);
- try{await validateTex(tex,item.display);html=replaceMath(html,id,tex,item.display);item.tex=tex;item.reviewed=true;item.provenance='User-entered TeX';activeRecord.html=html;$('source').value=html;updateMathReview();setView('preview');await persistActive();$('equation-tex').value='';$('equation-message').textContent='Equation applied and saved.';}
+ try{await validateTex(tex,item.display);html=replaceMath(html,id,tex,item.display);item.tex=tex;item.reviewed=true;item.provenance='User-entered TeX';activeRecord.html=html;$('source').value=html;updateMathReview();refreshReviewReport();setView('preview');await persistActive();$('equation-tex').value='';$('equation-message').textContent='Equation applied and saved.';}
  catch(error){$('equation-message').textContent=error.message;}finally{setBusy(false);}
 };
